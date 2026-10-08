@@ -199,52 +199,51 @@ h1 {
 
 /* Footer Styling */
 .app-footer {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-color);
     text-align: center;
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.875rem;
+    margin-top: 40px;
+    padding: 24px 0;
+    font-family: var(--font-family);
 }
 
 .app-footer p {
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 8px 0;
-}
-
-.github-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.github-link:hover {
-    color: var(--primary-hover);
-    text-decoration: underline;
+    margin: 6px 0;
 }
 
 .footer-links {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-top: 8px;
-    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
 }
 
-.footer-link {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.90rem;
+.footer-links .separator {
+    color: var(--border-dashed);
+    user-select: none;
 }
 
-.footer-link:hover {
+/* Styles all footer links consistently */
+.footer-link,
+.github-link {
     color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover,
+.github-link:hover {
+    color: var(--primary-hover);
     text-decoration: underline;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
 }
 
 .divider {
