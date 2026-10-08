@@ -1,3 +1,5 @@
+@import url('fonts.css');
+
 :root {
     --primary-color: #885341;
     --primary-hover: #6e4132;
@@ -200,7 +202,6 @@ h1 {
 /* Footer Styling */
 .app-footer {
     text-align: center;
-    color: var(--text-muted);
     font-size: 0.875rem;
     margin-top: 40px;
     padding: 24px 0;
@@ -230,7 +231,6 @@ h1 {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
 }
 
 .footer-link:hover,

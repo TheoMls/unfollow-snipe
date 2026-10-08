@@ -8,6 +8,11 @@
         margin: 0;
     }
 
+    .legal-container {
+        background: #fff4d9;
+        border: 0px;
+    }
+
     body {
         background-color: #fff4d9;
     }
