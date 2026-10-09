@@ -1,22 +1,68 @@
-@import url('fonts.css');
-
 :root {
+    /* Brand Colors (Light) */
     --primary-color: #885341;
     --primary-hover: #6e4132;
-    --text-muted: #7c7c7c;
-    --text-main: #2b2b2b;
+    --primary-alpha: rgba(136, 83, 65, 0.08);
+
+    /* Text Colors */
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+
+    /* Background & Surfaces */
+    --bg-body: #f8fafc;
     --bg-card: #ffffff;
+    --bg-card-subtle: #f1f5f9;
+
+    /* Borders */
     --border-color: #e2e8f0;
     --border-dashed: #d0b8b0;
+
+    /* Font Family */
     --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Dark Mode Overrides (Automatic System Preference or Manual Attribute) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --primary-color: #e29d82;
+        --primary-hover: #f2b29b;
+        --primary-alpha: rgba(226, 157, 130, 0.12);
+
+        --text-main: #f1f5f9;
+        --text-muted: #94a3b8;
+
+        --bg-body: #0f172a;
+        --bg-card: #1e293b;
+        --bg-card-subtle: #334155;
+
+        --border-color: #334155;
+        --border-dashed: #64453a;
+    }
+}
+
+[data-theme="dark"] {
+    --primary-color: #e29d82;
+    --primary-hover: #f2b29b;
+    --primary-alpha: rgba(226, 157, 130, 0.12);
+
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-subtle: #334155;
+
+    --border-color: #334155;
+    --border-dashed: #64453a;
 }
 
 body {
     font-family: var(--font-family);
     color: var(--text-main);
-    background-color: #f6f6f6;
+    background-color: var(--bg-body);
     margin: 0;
     padding: 24px;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1 {
@@ -26,7 +72,18 @@ h1 {
     margin-bottom: 24px;
 }
 
-/* Container that holds both file input boxes */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Upload Cards Container */
 .upload-container {
     display: flex;
     flex-direction: row;
@@ -35,7 +92,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Individual card wrapper for each input */
 .upload-card {
     flex: 1;
     padding: 24px;
@@ -43,7 +99,7 @@ h1 {
     border-radius: 12px;
     background-color: var(--bg-card);
     text-align: center;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
 
     display: flex;
     flex-direction: column;
@@ -53,12 +109,13 @@ h1 {
 
 .upload-card:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 4px 12px rgba(136, 83, 65, 0.08);
+    box-shadow: 0 4px 12px var(--primary-alpha);
 }
 
 .upload-card input[type="file"] {
     margin-left: 75px;
     display: block;
+    color: var(--text-main);
 }
 
 .upload-card p {
@@ -70,6 +127,7 @@ h1 {
 .selected-text {
     margin-top: 3% !important;
     font-size: 90%;
+    color: var(--primary-color);
 }
 
 .disclaimer {
@@ -78,7 +136,7 @@ h1 {
     margin-bottom: 24px;
 }
 
-/* Tab Buttons Container */
+/* Tab Navigation */
 .tabs-header {
     display: flex;
     gap: 12px;
@@ -87,7 +145,6 @@ h1 {
     justify-content: center;
 }
 
-/* Individual Tab Button */
 .tab-btn {
     padding: 12px 24px;
     border: none;
@@ -105,23 +162,20 @@ h1 {
     color: var(--primary-color);
 }
 
-/* Active Tab Button Styling */
 .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
 }
 
-/* Hide inactive tab contents by default */
 .tab-content {
     display: none;
 }
 
-/* Show active tab content */
 .tab-content.active {
     display: block;
 }
 
-/* User Card Grid Styling */
+/* User Card Grid */
 .user-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -130,32 +184,21 @@ h1 {
 
 .user-card {
     padding: 14px;
-    background: #f9f9f9;
+    background: var(--bg-card-subtle);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
 }
 
 .user-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-card);
 }
 
-.user-card a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.user-card a:hover {
-    color: var(--primary-hover);
-    text-decoration: underline;
-}
-
-/* Search Bar Styling */
+/* Search Input */
 .search-container {
     display: flex;
     justify-content: center;
@@ -185,7 +228,7 @@ h1 {
     color: var(--text-muted);
 }
 
-/* Privacy Banner Styling */
+/* Privacy Banner */
 .privacy-banner {
     align-items: center;
     justify-content: center;
@@ -193,19 +236,21 @@ h1 {
     margin: 0 auto 24px auto;
     font-size: 0.88rem;
     text-align: center;
+    color: var(--text-main);
 }
 
 .privacy-icon {
     font-size: 1rem;
 }
 
-/* Footer Styling */
+/* Footer */
 .app-footer {
     text-align: center;
     font-size: 0.875rem;
     margin-top: 40px;
     padding: 24px 0;
     font-family: var(--font-family);
+    color: var(--text-muted);
 }
 
 .app-footer p {
@@ -225,7 +270,6 @@ h1 {
     user-select: none;
 }
 
-/* Styles all footer links consistently */
 .footer-link,
 .github-link {
     color: var(--primary-color);
@@ -248,4 +292,130 @@ h1 {
 
 .divider {
     color: var(--border-dashed);
+}
+
+/* FAQ Accordions */
+.faq-section {
+    margin-top: 40px;
+}
+
+.faq-title {
+    font-size: 1.4rem;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--border-dashed);
+    box-shadow: 0 4px 12px var(--primary-alpha);
+}
+
+.faq-item[open] {
+    border-color: var(--border-dashed);
+    border-left: 4px solid var(--primary-color);
+}
+
+.faq-question {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--text-main);
+    padding: 5px 20px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question:hover {
+    color: var(--primary-color);
+    background-color: var(--primary-alpha);
+}
+
+.faq-icon {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform 0.25s ease, color 0.2s ease;
+    margin-left: 12px;
+}
+
+.faq-item[open] .faq-question {
+    color: var(--primary-color);
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    color: var(--primary-color);
+}
+
+.faq-answer {
+    padding: 0 20px 18px 20px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    border-top: 1px dashed var(--border-color);
+    margin-top: 2px;
+    padding-top: 14px;
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+/* Floating Circular Theme Toggle Button */
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+}
+
+.theme-btn:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px var(--primary-alpha);
+}
+
+.theme-btn:active {
+    transform: scale(0.95);
 }

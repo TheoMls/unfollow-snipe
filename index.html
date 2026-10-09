@@ -27,8 +27,9 @@
         content="Spot non-followers instantly in your browser. 100% client-side, zero login, zero data uploaded.">
     <meta name="twitter:image" content="https://unfollowsnipe.com/assets/img/og-image.png?v=2">
 
-    <script type="text/javascript" src="assets/js/script.js"></script>
     <script type="text/javascript" src="assets/js/validate.js"></script>
+    <script type="text/javascript" src="assets/js/theme.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
 
     <link rel="canonical" href="https://unfollowsnipe.com/">
 
@@ -68,6 +69,128 @@
             data export may show "Page not available".</small>
     </p>
     <div id="results-output"></div>
+
+    <section class="content-section"
+        style="max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: var(--text-main);">
+
+        <h2>How to Analyze Your Instagram Followers Privately</h2>
+        <p>
+            Unfollow Snipe is a privacy-focused tool that helps you identify Instagram users who don't follow you back.
+            Unlike other apps, Unfollow Snipe runs <strong>100% inside your browser</strong> using your exported Data
+            Download files. You never have to log in with your account or grant access to third-party APIs.
+        </p>
+
+        <h3>How It Works</h3>
+        <ol style="padding-left: 20px; margin-bottom: 28px;">
+            <li><strong>Request Your Data:</strong><br> Open Instagram, go to <em>Accounts Center
+                    &rarr; Your Information and Permissions &rarr; Export your information &rarr; Create Export &rarr;
+                    Export to device</em>.</li>
+            <li><strong>Request the right data:</strong><br>
+                <ul style="padding-left: 20px;">
+                    <li>Customize information: Select only Followers and Following.</li>
+                    <li>Data range: All Time</li>
+                    <li>Format: JSON</li>
+                    <li>Media quality: doesn't matter watever you select</li>
+                </ul>
+            </li>
+            <li><strong>Upload & Analyze:</strong><br> Unzip your archive and got to:
+                <em>connections/followers_and_following/</em> and select your <code>followers_1.json</code> and
+                <code>following.json</code> files above.
+            </li>
+        </ol>
+
+        <section class="faq-section">
+            <h3 class="faq-title">Frequently Asked Questions</h3>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Is my Instagram account safe?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Yes. Traditional unfollower apps ask for your Instagram password, which risks account bans or
+                            compromise. Unfollow Snipe processes your official data export locally in JavaScript—your
+                            login credentials and files are never seen or stored by anyone.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Does Unfollow Snipe store my uploaded files?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>No. All parsing happens entirely within your web browser's temporary memory. Refreshing or
+                            closing the tab completely clears all data.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Can using Unfollow Snipe get my Instagram account banned or flagged?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>No. Instagram bans accounts that use third-party tools requiring login credentials or
+                            automated scrapers. Because Unfollow Snipe only reads static files on your device and makes
+                            zero network requests to Instagram's servers, it is impossible for Instagram to detect or
+                            restrict your account.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>How long does it take for Instagram to send my data export file?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Instagram usually generates and emails your download link within 5 to 15 minutes. For older
+                            or highly active accounts with large histories, it can occasionally take up to a few hours.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Does Unfollow Snipe work on mobile devices?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Yes. You can request your data download in the Instagram mobile app, save the JSON files to
+                            your iPhone (Files app) or Android device (Downloads folder), and upload them directly to <a
+                                href="https://unfollowsnipe.com">unfollowsnipe.com</a> in your mobile web browser.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Why do some profile links show "Page not available" when I click them?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>If a user has deactivated their account, changed their username, or blocked you after your
+                            data export was generated, Instagram's web link for that old handle will direct to a broken
+                            page.</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Is Unfollow Snipe affiliated with Instagram or Meta?</span>
+                        <span class="faq-icon">▼</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Unfollow Snipe is an independent, free open-source privacy utility and is not affiliated
+                            with, authorized by, or endorsed by Instagram or Meta Platforms, Inc.</p>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+    </section>
 
     <footer class="app-footer">
         <nav class="footer-links">
