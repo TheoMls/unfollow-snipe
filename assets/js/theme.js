@@ -49,5 +49,9 @@ function updateToggleIcon() {
     const isDark = currentTheme === "dark" ||
         (!currentTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-    btn.textContent = isDark ? "🌙" : "☀️";
+    // Show Sun icon in Dark Mode (click to switch to Light)
+    // Show Moon icon in Light Mode (click to switch to Dark)
+    btn.innerHTML = isDark
+        ? '<img src="assets/img/sun.svg" alt="Switch to Light Mode" class="theme-icon">'
+        : '<img src="assets/img/moon.svg" alt="Switch to Dark Mode" class="theme-icon">';
 }
