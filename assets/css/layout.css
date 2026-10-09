@@ -9,23 +9,30 @@
     }
 
     .legal-container {
-        background: #fff4d9;
-        border: 0px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
     }
 
     body {
-        background-color: #fff4d9;
+        background-color: var(--bg-body);
     }
 }
 
 @media (max-width: 480px) {
 
-    /* Target the BMC popup iframe and container */
+    /* Buy Me a Coffee Popup Scaling for Mobile */
     #bmc-container,
     iframe[src*="buymeacoffee.com"],
     div[id^="bmc-"] {
-        /* Prevent horizontal screen overflowing */
         max-width: 85vw !important;
         transform: scale(0.9) !important;
+    }
+
+    .theme-btn {
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 }
