@@ -428,9 +428,17 @@ a:hover {
     height: 20px;
     display: block;
     pointer-events: none;
+    transition: filter 0.2s ease;
 }
 
-/* Invert black SVG paths to light/cream in Dark Mode */
+/* Invert black SVG paths to bright cream/white in Dark Mode */
 [data-theme="dark"] .theme-icon {
-    filter: invert(1);
+    filter: invert(1) brightness(1.8);
+}
+
+/* Support OS system preference fallback */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-icon {
+        filter: invert(1) brightness(1.8);
+    }
 }
