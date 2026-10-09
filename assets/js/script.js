@@ -232,3 +232,40 @@ function filterUserCards(query) {
 function getCleanInstagramUrl(username) {
     return `https://www.instagram.com/${username}/`;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("guide-modal");
+    const openBtn = document.getElementById("open-guide-btn");
+    const closeBtn = document.getElementById("close-guide-btn");
+    const gotItBtn = document.getElementById("modal-got-it-btn");
+
+    if (!modal || !openBtn) return;
+
+    function openModal() {
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+    }
+
+    function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = ""; // Restore scrolling
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    gotItBtn.addEventListener("click", closeModal);
+
+    // Close on click outside card
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+            closeModal();
+        }
+    });
+});
