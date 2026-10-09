@@ -1,59 +1,56 @@
 :root {
-    /* Brand Colors (Light) */
-    --primary-color: #885341;
-    --primary-hover: #6e4132;
-    --primary-alpha: rgba(136, 83, 65, 0.08);
+    --primary-color: #9e6e55;
+    --primary-hover: #82543e;
+    --primary-alpha: rgba(158, 110, 85, 0.08);
 
-    /* Text Colors */
-    --text-main: #1e293b;
-    --text-muted: #64748b;
+    --text-main: #362e2a;
+    --text-muted: #7e7067;
 
-    /* Background & Surfaces */
-    --bg-body: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-card-subtle: #f1f5f9;
+    --bg-body: #f5efea;
+    --bg-card: #fcf9f6;
+    --bg-card-subtle: #eae1d7;
 
-    /* Borders */
-    --border-color: #e2e8f0;
-    --border-dashed: #d0b8b0;
+    --border-color: #dfd3c7;
+    --border-dashed: #c29d89;
 
     /* Font Family */
     --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
-/* Dark Mode Overrides (Automatic System Preference or Manual Attribute) */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --primary-color: #e29d82;
-        --primary-hover: #f2b29b;
-        --primary-alpha: rgba(226, 157, 130, 0.12);
+[data-theme="dark"] {
+    --primary-color: #dcae86;
+    --primary-hover: #e6ba94;
+    --primary-alpha: rgba(220, 174, 134, 0.12);
 
-        --text-main: #f1f5f9;
-        --text-muted: #94a3b8;
 
-        --bg-body: #0f172a;
-        --bg-card: #1e293b;
-        --bg-card-subtle: #334155;
+    --text-main: #ebdcd0;
+    --text-muted: #a6988d;
 
-        --border-color: #334155;
-        --border-dashed: #64453a;
-    }
+    --bg-body: #2d2724;
+    --bg-card: #362f2c;
+    --bg-card-subtle: #423a36;
+
+    --border-color: #504641;
+    --border-dashed: #a0785f;
 }
 
-[data-theme="dark"] {
-    --primary-color: #e29d82;
-    --primary-hover: #f2b29b;
-    --primary-alpha: rgba(226, 157, 130, 0.12);
+/* System Media Query for Automatic Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --primary-color: #dcae86;
+        --primary-hover: #e6ba94;
+        --primary-alpha: rgba(220, 174, 134, 0.12);
 
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
+        --text-main: #ebdcd0;
+        --text-muted: #a6988d;
 
-    --bg-body: #0f172a;
-    --bg-card: #1e293b;
-    --bg-card-subtle: #334155;
+        --bg-body: #2d2724;
+        --bg-card: #362f2c;
+        --bg-card-subtle: #423a36;
 
-    --border-color: #334155;
-    --border-dashed: #64453a;
+        --border-color: #504641;
+        --border-dashed: #a0785f;
+    }
 }
 
 body {
@@ -81,6 +78,20 @@ a {
 a:hover {
     color: var(--primary-hover);
     text-decoration: underline;
+}
+
+.github-icon-wrapper {
+    background-color: var(--bg-body);
+    border-radius: 50%;
+}
+
+/* Icon image inside */
+#git-hub-img {
+    display: block;
+}
+
+[data-theme="dark"] #git-hub-img {
+    filter: invert(1);
 }
 
 /* Upload Cards Container */

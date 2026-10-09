@@ -7,15 +7,6 @@
     .upload-card {
         margin: 0;
     }
-
-    .legal-container {
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-    }
-
-    body {
-        background-color: var(--bg-body);
-    }
 }
 
 @media (max-width: 480px) {
