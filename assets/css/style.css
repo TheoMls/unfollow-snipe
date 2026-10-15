@@ -253,6 +253,15 @@ a:hover {
     color: var(--border-dashed);
 }
 
+/* Empty state messaging */
+.empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    padding: 32px 16px;
+    margin: 0;
+}
+
 /* FAQ Accordions */
 .faq-section {
     margin-top: 40px;

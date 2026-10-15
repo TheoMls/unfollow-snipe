@@ -332,6 +332,7 @@ function renderResults(nonFollowers, fans) {
 function buildUserListElement(users, emptyMessage) {
     const container = document.createElement("div");
 
+    // List is completely empty to begin with
     if (users.length === 0) {
         const emptyParagraph = document.createElement("p");
         emptyParagraph.className = "empty-msg";
@@ -362,6 +363,14 @@ function buildUserListElement(users, emptyMessage) {
     });
 
     container.appendChild(listDiv);
+
+    // Hidden empty state element toggled dynamically when search returns 0 results
+    const searchEmptyMsg = document.createElement("p");
+    searchEmptyMsg.className = "empty-msg search-empty-msg";
+    searchEmptyMsg.textContent = "No matching usernames found";
+    searchEmptyMsg.style.display = "none";
+    container.appendChild(searchEmptyMsg);
+
     return container;
 }
 
@@ -373,15 +382,26 @@ function filterUserCards(query) {
     if (!activePanel) return;
 
     const cards = activePanel.querySelectorAll(".user-card");
+    const searchEmptyMsg = activePanel.querySelector(".search-empty-msg");
+
+    if (cards.length === 0) return; // If list was originally empty, skip filtering
+
+    let visibleCount = 0;
 
     cards.forEach(card => {
         const username = card.textContent.toLowerCase();
         if (username.includes(searchTerm)) {
             card.style.display = ""; // Show matching card
+            visibleCount++;
         } else {
             card.style.display = "none"; // Hide non-matching card
         }
     });
+
+    // Toggle search empty state depending on whether any cards match
+    if (searchEmptyMsg) {
+        searchEmptyMsg.style.display = visibleCount === 0 ? "block" : "none";
+    }
 }
 
 function getCleanInstagramUrl(username) {
