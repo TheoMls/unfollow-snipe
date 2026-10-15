@@ -27,8 +27,9 @@ Traditional "unfollower tracker" apps require you to input your Instagram passwo
   - **Not Following Back:** Spot accounts you follow that don't follow you back.
   - **Fans:** See accounts following you that you don't follow back.
 -  **Real-Time Username Search:** Instant text filtering across result lists.
--  **Light / Dark Mode:** Custom Velvet theme with automatic system OS preference detection.
--  **Fully Responsive Design:** Works seamlessly on desktop, tablet, and mobile browsers.
+- **Progressive Web App (PWA):** Installable on iOS, Android, and Desktop with complete offline caching, dynamic asset updates, and manifest integration (`sw.js`).
+- **Light / Dark Mode:** Custom Velvet theme with automatic system OS preference detection.
+- **Fully Responsive Design:** Works seamlessly on desktop, tablet, and mobile browsers.
 
 ---
 
@@ -99,6 +100,8 @@ unfollow-snipe/
 ├── attributions.html             # Asset creators & license credits
 ├── index.html                    # Main application entry point
 ├── privacy.html                  # Privacy policy & AdSense disclosures
+├── manifest.json                 # PWA Web App Manifest
+├── sw.js                         # PWA Offline Service Worker
 ├── robots.txt                    # Search engine crawler instructions
 ├── sitemap.xml                   # XML Sitemap for SEO indexing
 └── README.md
@@ -131,6 +134,7 @@ Because **Unfollow Snipe** is built with vanilla HTML, CSS, and JavaScript, no c
 
 - **HTML5 & CSS3:** CSS Custom Properties, CSS Grid, Flexbox, & Dark Mode.
 - **Vanilla JavaScript (ES6+):** Async/Await, FileReader API, Sets, & DOM Manipulation.
+- **PWA & Service Worker:** Cache API & Web App Manifest for offline installation.
 - **[JSZip](https://stuk.github.io/jszip/):** In-browser zip file extraction.
 - **[Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans):** Typography.
 - **Cloudflare Pages:** Global static CDN hosting.

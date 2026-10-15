@@ -444,3 +444,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Register Service Worker for PWA Support
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("/sw.js")
+            .then((reg) => console.log("PWA Service Worker registered:", reg.scope))
+            .catch((err) => console.error("Service Worker registration failed:", err));
+    });
+}

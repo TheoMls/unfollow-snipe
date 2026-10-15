@@ -1,0 +1,62 @@
+{
+    "name": "Unfollow Snipe",
+    "short_name": "UnfollowSnipe",
+    "id": "unfollow-snipe-pwa",
+    "description": "100% Client-side Instagram follower analysis. Zero login, zero server uploads.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#f5efea",
+    "theme_color": "#885341",
+    "categories": [
+        "utilities",
+        "social",
+        "privacy"
+    ],
+    "icons": [
+        {
+            "src": "assets/img/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/img/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Export Data Guide",
+            "short_name": "Guide",
+            "description": "Learn how to download your JSON export from Instagram",
+            "url": "/#guide-modal",
+            "icons": [
+                {
+                    "src": "assets/img/logo.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/img/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Unfollow Snipe Dashboard"
+        },
+        {
+            "src": "assets/img/og-image.png",
+            "sizes": "1200x630",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Unfollow Snipe Mobile View"
+        }
+    ]
+}
