@@ -27,6 +27,8 @@
         content="Spot non-followers instantly in your browser. 100% client-side, zero login, zero data uploaded.">
     <meta name="twitter:image" content="https://unfollowsnipe.com/assets/img/og-image.png?v=2">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <script type="text/javascript" src="assets/js/validate.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
@@ -65,16 +67,33 @@
     </div>
 
     <div class="upload-container">
-        <div class="upload-card">
-            <p>Select your Instagram followers_1.json file:</p>
-            <input type="file" id="followers-input" accept=".json">
-            <p class="selected-text" id="selected-followers"></p>
+        <!-- Primary ZIP Dropzone -->
+        <div class="upload-card zip-card" id="zip-dropzone">
+            <div class="zip-icon">📦</div>
+            <p class="upload-title"><strong>Drop your Instagram .zip file here</strong></p>
+            <p class="upload-subtitle">or click to browse from your device</p>
+            <input type="file" id="zip-input" accept=".zip" class="hidden-file-input">
+            <p class="selected-text" id="zip-status"></p>
         </div>
-        <div class="upload-card">
-            <p>Select your Instagram following.json file:</p>
-            <input type="file" id="following-input" accept=".json">
-            <p class="selected-text" id="selected-following"></p>
-        </div>
+
+        <!-- Toggle for Manual JSON Upload -->
+        <details class="manual-upload-details">
+            <summary class="manual-upload-toggle">Already extracted your files? Upload .json files manually</summary>
+            <div class="manual-json-grid">
+                <div class="upload-card">
+                    <p class="upload-title"><strong>Select <code>followers_1.json</code></strong></p>
+                    <p class="upload-subtitle">Click to browse from your device</p>
+                    <input type="file" id="followers-input" accept=".json" class="hidden-file-input">
+                    <p class="selected-text" id="selected-followers"></p>
+                </div>
+                <div class="upload-card">
+                    <p class="upload-title"><strong>Select <code>following.json</code></strong></p>
+                    <p class="upload-subtitle">Click to browse from your device</p>
+                    <input type="file" id="following-input" accept=".json" class="hidden-file-input">
+                    <p class="selected-text" id="selected-following"></p>
+                </div>
+            </div>
+        </details>
     </div>
 
     <p class="disclaimer">
@@ -83,8 +102,7 @@
     </p>
     <div id="results-output"></div>
 
-    <section class="content-section"
-        style="max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: var(--text-main);">
+    <section style="line-height: 1.6;">
 
         <h2>Analyze Your Instagram Followers Privately</h2>
         <p>

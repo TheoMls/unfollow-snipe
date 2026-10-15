@@ -1,11 +1,10 @@
-@media (max-width: 768px) {
+@media (max-width: 680px) {
     .upload-container {
-        flex-direction: column;
-        gap: 16px;
+        max-width: 100%;
     }
 
-    .upload-card {
-        margin: 0;
+    .manual-json-grid {
+        grid-template-columns: 1fr;
     }
 }
 

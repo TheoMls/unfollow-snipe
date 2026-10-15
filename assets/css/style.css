@@ -57,9 +57,10 @@ body {
     font-family: var(--font-family);
     color: var(--text-main);
     background-color: var(--bg-body);
-    margin: 0;
-    padding: 24px;
     transition: background-color 0.25s ease, color 0.25s ease;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 h1 {
@@ -92,59 +93,6 @@ a:hover {
 
 [data-theme="dark"] #git-hub-img {
     filter: invert(1);
-}
-
-/* Upload Cards Container */
-.upload-container {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.upload-card {
-    flex: 1;
-    padding: 24px;
-    border: 2px dashed var(--border-dashed);
-    border-radius: 12px;
-    background-color: var(--bg-card);
-    text-align: center;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.upload-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 12px var(--primary-alpha);
-}
-
-.upload-card input[type="file"] {
-    margin-left: 75px;
-    display: block;
-    color: var(--text-main);
-}
-
-.upload-card p {
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-top: 0;
-}
-
-.selected-text {
-    margin-top: 3% !important;
-    font-size: 90%;
-    color: var(--primary-color);
-}
-
-.disclaimer {
-    color: var(--text-muted);
-    text-align: center;
-    margin-bottom: 24px;
 }
 
 /* Tab Navigation */
@@ -336,7 +284,6 @@ a:hover {
 
 .faq-item:hover {
     border-color: var(--border-dashed);
-    box-shadow: 0 4px 12px var(--primary-alpha);
 }
 
 .faq-item[open] {
@@ -441,4 +388,118 @@ a:hover {
     :root:not([data-theme="light"]) .theme-icon {
         filter: invert(1) brightness(1.8);
     }
+}
+
+/* Upload Section Container */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Base Upload Card (Shared by ZIP dropzone and manual JSON cards) */
+.upload-card {
+    position: relative;
+    padding: 28px 20px;
+    border: 2px dashed var(--border-dashed);
+    border-radius: 12px;
+    background-color: var(--bg-card);
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Unified Hover & Drag-Over Behavior across all cards */
+.upload-card:hover,
+.upload-card.drag-over {
+    border-color: var(--primary-color);
+    background-color: var(--bg-card-subtle);
+    transform: translateY(-1px);
+}
+
+/* ZIP Dropzone Specific Padding */
+.zip-card {
+    padding: 36px 24px;
+}
+
+.zip-icon {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.upload-title {
+    color: var(--text-muted);
+    margin: 0 0 4px 0 !important;
+}
+
+.upload-subtitle {
+    font-size: 0.88rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+}
+
+/* Invisible File Input overlay for 100% card clickability */
+.hidden-file-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.selected-text {
+    margin-top: 10px !important;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-height: 1.2em;
+}
+
+/* Manual JSON Accordion & Grid Layout */
+.manual-upload-details {
+    margin-top: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+.manual-upload-toggle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.manual-upload-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* Equal 2-Column Grid for JSON Upload Cards */
+.manual-json-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.disclaimer {
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
 }
