@@ -2,7 +2,9 @@ const CACHE_NAME = "unfollow-snipe-v1";
 const STATIC_ASSETS = [
     "./",
     "./index.html",
+    "./privacy",
     "./privacy.html",
+    "./attributions",
     "./attributions.html",
     "./manifest.json",
     "./assets/css/style.css",
