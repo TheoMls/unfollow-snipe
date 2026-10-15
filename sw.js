@@ -74,34 +74,47 @@ self.addEventListener("fetch", (event) => {
 
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            const fetchAndCache = () =>
-                fetch(event.request, { redirect: "follow" }).then((networkResponse) => {
-                    // Handle redirected responses gracefully
+            // If asset is already in cache, serve it immediately without blocking on network revalidation
+            if (cachedResponse) {
+                // Background update only for static sub-resources (CSS/JS/images), not page navigations
+                if (event.request.mode !== "navigate") {
+                    event.waitUntil(
+                        fetch(event.request)
+                            .then((networkResponse) => {
+                                if (networkResponse && networkResponse.status === 200) {
+                                    const responseClone = networkResponse.clone();
+                                    caches.open(CACHE_NAME).then((cache) => {
+                                        cache.put(event.request, responseClone);
+                                    });
+                                }
+                            })
+                            .catch(() => {/* Ignore offline background fetch errors */ })
+                    );
+                }
+                return cachedResponse;
+            }
+
+            // If not in cache, fetch from network
+            return fetch(event.request, { redirect: "follow" })
+                .then((networkResponse) => {
                     if (networkResponse.redirected) {
                         return fetch(networkResponse.url);
                     }
-
-                    if (networkResponse && (networkResponse.status === 200 || networkResponse.type === "opaque")) {
+                    if (networkResponse && networkResponse.status === 200) {
                         const responseClone = networkResponse.clone();
                         caches.open(CACHE_NAME).then((cache) => {
                             cache.put(event.request, responseClone);
                         });
                     }
                     return networkResponse;
+                })
+                .catch(() => {
+                    return new Response("Offline resource unavailable", {
+                        status: 503,
+                        statusText: "Service Unavailable",
+                        headers: new Headers({ "Content-Type": "text/plain" })
+                    });
                 });
-
-            if (cachedResponse) {
-                event.waitUntil(fetchAndCache().catch(() => {/* Ignore background errors when offline */ }));
-                return cachedResponse;
-            }
-
-            return fetchAndCache().catch(() => {
-                return new Response("Offline resource unavailable", {
-                    status: 503,
-                    statusText: "Service Unavailable",
-                    headers: new Headers({ "Content-Type": "text/plain" })
-                });
-            });
         })
     );
 });
