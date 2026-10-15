@@ -75,7 +75,12 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             const fetchAndCache = () =>
-                fetch(event.request).then((networkResponse) => {
+                fetch(event.request, { redirect: "follow" }).then((networkResponse) => {
+                    // Handle redirected responses gracefully
+                    if (networkResponse.redirected) {
+                        return fetch(networkResponse.url);
+                    }
+
                     if (networkResponse && (networkResponse.status === 200 || networkResponse.type === "opaque")) {
                         const responseClone = networkResponse.clone();
                         caches.open(CACHE_NAME).then((cache) => {
