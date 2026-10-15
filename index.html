@@ -116,7 +116,7 @@
                 <button type="button" id="close-guide-btn" class="modal-close" aria-label="Close modal">&times;</button>
 
                 <h2 id="modal-title" class="modal-title">How to Export Your Instagram Data</h2>
-                <p class="modal-subtitle">Follow these quick steps to download your official JSON files safely from
+                <p class="modal-subtitle">Follow these quick steps to download your official files safely from
                     Instagram.</p>
 
                 <ol class="guide-steps">
@@ -139,8 +139,7 @@
                         </div>
                         <ul class="step-sublist">
                             <li><strong>Information:</strong> Select <em>Customize information</em> and check only
-                                <strong>Followers and following</strong>.
-                            </li>
+                                <strong>Followers and following</strong>.</li>
                             <li><strong>Date Range:</strong> Change to <strong>All time</strong>.</li>
                             <li><strong>Format:</strong> Must be set to <strong>JSON</strong> <em>(HTML format will not
                                     work)</em>.</li>
@@ -152,15 +151,27 @@
                     <li class="guide-step">
                         <div class="step-header">
                             <span class="step-number">3</span>
-                            <strong>Extract & Upload</strong>
+                            <strong>Upload & Analyze</strong>
                         </div>
-                        <p>Once Instagram emails your download link, unzip the downloaded <code>.zip</code> file and
-                            navigate to:</p>
-                        <div class="code-callout">
-                            connections/followers_and_following/
-                        </div>
-                        <p>Select and upload your <code>followers_1.json</code> and <code>following.json</code> files
-                            below.</p>
+                        <p>Once Instagram sends your download link, download the file and use one of two ways to process
+                            it:</p>
+
+                        <ul class="step-sublist">
+                            <li>
+                                <strong>Option A (Easiest):</strong> Drop or select the entire downloaded
+                                <code>.zip</code> file directly into the primary drop zone above—<strong>no unzipping
+                                    required!</strong>
+                            </li>
+                            <li>
+                                <strong>Option B (Manual JSON):</strong> If you already extracted your archive, toggle
+                                the manual option and select your files from:
+                                <div class="code-callout">
+                                    connections/followers_and_following/
+                                </div>
+                                Upload <code>followers_1.json</code> and <code>following.json</code> into their
+                                respective cards.
+                            </li>
+                        </ul>
                     </li>
                 </ol>
 
