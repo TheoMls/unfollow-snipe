@@ -28,7 +28,7 @@ const STATIC_ASSETS = [
     "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
 ];
 
-// Install Event
+// Install Event: Cache all assets
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -43,7 +43,7 @@ self.addEventListener("install", (event) => {
     );
 });
 
-// Activate Event
+// Activate Event: Clear old cache buckets
 self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
@@ -58,43 +58,29 @@ self.addEventListener("activate", (event) => {
     );
 });
 
-// Fetch Event
+// Fetch Event: Cache-First Strategy for Instant Load
 self.addEventListener("fetch", (event) => {
     if (event.request.method !== "GET") return;
 
     const url = new URL(event.request.url);
 
-    // Bypass unsupported schemes (e.g. chrome-extension://)
+    // Bypass unsupported schemes (chrome-extension://, etc.)
     if (url.protocol !== "http:" && url.protocol !== "https:") return;
 
-    // Bypass dynamic third-party ads or donation scripts
+    // Bypass third-party widgets and ads
     if (url.origin.includes("googlesyndication") || url.origin.includes("buymeacoffee")) {
         return;
     }
 
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            // If asset is already in cache, serve it immediately without blocking on network revalidation
+            // FAST PATH: If asset/page is in cache, return it instantly.
+            // Do NOT trigger background fetches on page navigation to avoid network delay.
             if (cachedResponse) {
-                // Background update only for static sub-resources (CSS/JS/images), not page navigations
-                if (event.request.mode !== "navigate") {
-                    event.waitUntil(
-                        fetch(event.request)
-                            .then((networkResponse) => {
-                                if (networkResponse && networkResponse.status === 200) {
-                                    const responseClone = networkResponse.clone();
-                                    caches.open(CACHE_NAME).then((cache) => {
-                                        cache.put(event.request, responseClone);
-                                    });
-                                }
-                            })
-                            .catch(() => {/* Ignore offline background fetch errors */ })
-                    );
-                }
                 return cachedResponse;
             }
 
-            // If not in cache, fetch from network
+            // NETWORK FALLBACK: Only fetch from network if NOT in cache
             return fetch(event.request, { redirect: "follow" })
                 .then((networkResponse) => {
                     if (networkResponse.redirected) {
