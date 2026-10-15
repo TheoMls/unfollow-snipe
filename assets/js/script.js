@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let followersSet = null;
     let followingList = null;
-    let currentSource = null; // Tracks active mode: 'zip' or 'manual'
+    let currentSource = null; // Tracks active upload mode: 'zip' or 'manual'
 
     // --- RESET HELPERS ---
     function resetZipInput() {
@@ -65,13 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function handleZipFile(file) {
-        // Switch mode to ZIP: reset manual inputs & clear previous results
-        currentSource = "zip";
-        resetManualInputs();
-        clearResults();
-        followersSet = null;
-        followingList = null;
-
         zipStatus.textContent = "Unzipping and reading files locally...";
         zipStatus.style.color = "var(--primary-color)";
 
@@ -94,14 +87,19 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!rawFollowers || !rawFollowing) {
                 zipStatus.textContent = "Missing 'followers_1.json' or 'following.json' inside zip archive.";
                 zipStatus.style.color = "#d9534f";
-                return;
+                return; // Return early without clearing existing valid state or results
             }
 
             if (!isValidFollowersFile(rawFollowers) || !isValidFollowingFile(rawFollowing)) {
                 zipStatus.textContent = "Invalid JSON data structure inside ZIP file.";
                 zipStatus.style.color = "#d9534f";
-                return;
+                return; // Return early without clearing existing valid state or results
             }
+
+            // ZIP verified: Now safely switch mode, clear manual inputs & previous results
+            currentSource = "zip";
+            resetManualInputs();
+            clearResults();
 
             // Parse Followers
             followersSet = new Set(
@@ -131,25 +129,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- MANUAL JSON FALLBACK HANDLING ---
     if (followersInput) {
         followersInput.addEventListener("change", (event) => {
-            // Switching from ZIP to Manual: clear ZIP state and reset data
-            if (currentSource !== "manual") {
-                currentSource = "manual";
-                resetZipInput();
-                followersSet = null;
-                followingList = null;
-                clearResults();
-            }
-
             readFile(event, (parsedData) => {
                 const outputElem = document.getElementById("selected-followers");
 
                 if (!isValidFollowersFile(parsedData)) {
                     outputElem.textContent = "Invalid file! Please select 'followers_1.json'.";
                     outputElem.style.color = "#d9534f";
-                    followersSet = null;
-                    clearResults();
-                    return;
+                    return; // Return early without clearing existing valid state or results
                 }
+
+                // Clear previous ZIP state & results
+                if (currentSource === "zip") {
+                    resetZipInput();
+                    followersSet = null;
+                    followingList = null;
+                    clearResults();
+                }
+
+                currentSource = "manual";
 
                 outputElem.textContent = `Loaded ${parsedData.length} followers!`;
                 outputElem.style.color = "#24cb0a";
@@ -167,25 +164,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (followingInput) {
         followingInput.addEventListener("change", (event) => {
-            // Switching from ZIP to Manual: clear ZIP state and reset data
-            if (currentSource !== "manual") {
-                currentSource = "manual";
-                resetZipInput();
-                followersSet = null;
-                followingList = null;
-                clearResults();
-            }
-
             readFile(event, (parsedData) => {
                 const outputElem = document.getElementById("selected-following");
 
                 if (!isValidFollowingFile(parsedData)) {
                     outputElem.textContent = "Invalid file! Please select 'following.json'.";
                     outputElem.style.color = "#d9534f";
+                    return; // Return early without clearing existing valid state or results
+                }
+
+                // Clear previous ZIP state & results
+                if (currentSource === "zip") {
+                    resetZipInput();
+                    followersSet = null;
                     followingList = null;
                     clearResults();
-                    return;
                 }
+
+                currentSource = "manual";
 
                 followingList = parsedData.relationships_following
                     .map((item) => ({
@@ -213,8 +209,21 @@ function readFile(event, callback) {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-        const parsedData = JSON.parse(e.target.result);
-        callback(parsedData); // Pass data back to caller when ready
+        try {
+            const parsedData = JSON.parse(e.target.result);
+            callback(parsedData);
+        } catch (err) {
+            console.error("JSON Parsing Error:", err);
+            // Handle malformed non-JSON files gracefully
+            const outputElem = event.target.id === "followers-input"
+                ? document.getElementById("selected-followers")
+                : document.getElementById("selected-following");
+
+            if (outputElem) {
+                outputElem.textContent = "Invalid JSON file structure!";
+                outputElem.style.color = "#d9534f";
+            }
+        }
     };
 
     reader.readAsText(file);
@@ -224,7 +233,7 @@ function readFile(event, callback) {
 function checkAndCompare(followersSet, followingList) {
     if (!followersSet || !followingList) return;
 
-    // Accounts i follow that do not follow back
+    // Accounts that do not follow back
     const nonFollowers = followingList
         .filter(user => !followersSet.has(user.username));
 
